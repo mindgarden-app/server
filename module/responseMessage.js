@@ -14,5 +14,7 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     GARDEN_SELECT_FAIL:"garden table select fail",
     GARDEN_SUCCESS:"garden get 성공",
     GARDEN_FAIL:"garden get 실패",
+    GARDEN_INSERT_FAIL:"garen insert 실패",
+    GARDEN_INSERT_SUCCESS:"garden insert 성공",
 
 };
