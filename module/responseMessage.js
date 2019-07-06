@@ -16,6 +16,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     GARDEN_FAIL:"garden get 실패",
     GARDEN_INSERT_FAIL:"garden insert 실패",
     GARDEN_INSERT_SUCCESS:"garden insert 성공",
+    BALLOON_UPDATE_FAIL:"balloon update 실패",
+    ALREADY_PLANT:"이미 심으셨습니다!",
+    WRITE_DIARY:"일기를 써야 심을 수 있어요!",
 
     DIARY_DELETE_SUCCESS: "일기 삭제 성공",
     DIARY_DELETE_FAIL: "일기 삭제 실패"
