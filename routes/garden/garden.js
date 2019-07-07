@@ -4,7 +4,7 @@ const util = require('../../module/utils');
 const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
-const upload = require('../../config/multer');//post할때 필요
+const upload = require('../../config/multer');
 const moment = require('moment');
 
 //메인
@@ -20,7 +20,6 @@ router.get('/:userIdx/:date', async(req, res)=>{
             if (getBalloonResult.length == 0) {//garden 성공, balloon 실패
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_FAIL));
             } else {//둘 다 성공
-                //console.log(getGardenResult.length);
                 for(i=0;i<getGardenResult.length;i++){
                     getGardenResult[i]['balloon']=getBalloonResult[0]['balloon'];
                 }
