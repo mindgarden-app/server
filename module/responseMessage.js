@@ -18,7 +18,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     GARDEN_INSERT_SUCCESS:"garden insert 성공",
 
     DIARY_DELETE_SUCCESS: "일기 삭제 성공",
-    DIARY_DELETE_FAIL: "일기 삭제 실패"
+    DIARY_DELETE_FAIL: "일기 삭제 실패",
+    DIARY_SELECT_FAIL: "일기 조회 실패",
+    DIARY_SELECT_SUCCESS: "일기 조회 성공",
 
 
 };

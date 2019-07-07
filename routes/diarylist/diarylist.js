@@ -5,17 +5,19 @@ const util = require('../../module/utils');
 const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 
+//URI: diarylist
 router.get('/', async(req, res) => {
     try{
         const userIdx = req.body.userIdx;
         const date = req.body.date;
-        const selectEpisodeCmtQuery = 'SELECT * FROM diary WHERE wpIdx = ? ORDER BY writetime DESC';
-        const selectEpisodeCmtResult = await db.queryParam_Arr(selectEpisodeCmtQuery, [req.params.epIdx]);
+        const getDiaryQuery = 'SELECT * FROM diary WHERE userIdx = ? ORDER BY date DESC';
+        const getDiaryResult = await db.queryParam_Arr(getDiaryQuery, userIdx);
 
-            if (!selectEpisodeCmtResult) {
-                res.status(200).send(utils.successFalse(statusCode.DB_ERROR, resMessage.CMT_DB_SELECT_ERROR));
+            if (!getDiaryResult) {
+                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_SELECT_FAIL));
             } else {
-                res.status(200).send(utils.successTrue(statusCode.OK, resMessage.COMMENT_SELECTED, selectEpisodeCmtResult));
+                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SELECT_SUCCESS,getDiaryResult));
+                console.log(getDiaryResult);
             }
         }catch(err){
             console.log(err);

@@ -7,7 +7,7 @@ const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 
 
-//diarylist/delete
+//URI: diarylist/delete
 router.delete('/', async (req, res) => {
     try{
         const userIdx = req.body.userIdx;
