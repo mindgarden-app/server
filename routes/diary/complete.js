@@ -17,7 +17,7 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
     } else {
         const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
         const getDiaryResult=await db.queryParam_Parse(getDiaryQuery, [req.body.userIdx, req.body.date+'%']);
-        if (getDiaryResult.length == 0) {//트랜잭션 commit, get fail
+        if (getDiaryResult.length == 0) {
             res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_GET_FAIL));
         } else {
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_GET_SUCCESS, getDiaryResult));
