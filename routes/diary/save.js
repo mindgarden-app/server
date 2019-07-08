@@ -20,7 +20,7 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
             const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, diary_img]);
             const insertBalloonResult = await db.queryParam_Parse(insertBalloonQuery, [req.body.userIdx, 0, 1]);
         });
-        if (insertTransaction == 0) {//새로운 유저 트랜잭션
+        if (!insertTransaction) {//새로운 유저 트랜잭션
             res.status(200).send(util.successFalse(statusCode.OK, resMessage.NEW_USER_FAIL));
         } else {
             const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
