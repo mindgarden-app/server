@@ -10,6 +10,7 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     MISS_MATCH_PW: "비밀번호가 맞지 않습니다.",
     LOGIN_SUCCESS: "로그인 성공",
     LOGIN_FAIL: "로그인 실패",
+    DB_ERROR:"db error",
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",
