@@ -13,7 +13,7 @@ router.get('/', async(req, res) => {
         const diaryIdx=req.body.diaryIdx;
         const userIdx = req.body.userIdx;
         const date = req.body.date;
-        const getDiaryQuery = 'SELECT * FROM diary WHERE diaryIdx = ?';
+        const getDiaryQuery = 'SELECT * FROM diary JOIN weather ON weather.weatherIdx = diary.weatherIdx WHERE diaryIdx = ?';
         const getDiaryResult = await db.queryParam_Arr(getDiaryQuery, diaryIdx);
 
             if (!getDiaryResult) {
