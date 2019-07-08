@@ -17,20 +17,20 @@ router.post('/', async(req, res) => {
         } else{
             if (getCheckResult[0]['check'] == '0') {//일기를 쓰고 안심음-->심을 수 있음
                 const insertGardenQuery = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
-                const garden_date = moment().format("YYYY-MM-DD ddd");
-                const insertGardenResult = await db.queryParam_Parse(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.body.userIdx]);
-                if (insertGardenResult.length == 0) {
-                    res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_INSERT_FAIL));
-                } else {
-                    //check=1, balloon=0로 update
-                    const updateBalloonQuery = 'UPDATE balloon SET `check` = 1 , `balloon` = 0 WHERE userIdx = ?';
+                const updateBalloonQuery = 'UPDATE balloon SET `check` = 1 , `balloon` = 0 WHERE userIdx = ?';
+                const insertTransaction = await db.Transaction(async(connection) => {
+                    const garden_date = moment().format("YYYY-MM-DD ddd");
+                    const insertGardenResult = await db.queryParam_Parse(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.body.userIdx]);
                     const updateBalloonResult = await db.queryParam_Parse(updateBalloonQuery,[req.body.userIdx]);
-                    console.log(updateBalloonResult);
-                    if (updateBalloonResult.length == 0) {
-                        res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.BALLOON_UPDATE_FAIL));
-                    } else {//최종 성공
-                        res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_INSERT_SUCCESS, "{ balloon : 0 }"));
-                    }
+                });
+                if (insertTransaction == 0) {
+                    res.status(200).send(util.successFalse(statusCode.OK, resMessage.PLANT_FAIL));
+                } else {//최종 성공
+                    const balloon_result=[];
+                    var json = new Object();
+                    json.balloon = 0;
+                    balloon_result.push(json);
+                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.PLANT_SUCCESS, balloon_result));
                 }
             } else if(getCheckResult[0]['check'] == '1'){//일기를 쓰고 심음-->심을 수 없음
                 console.log("1");
