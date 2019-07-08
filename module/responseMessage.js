@@ -38,4 +38,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     DIARY_SELECT_SUCCESS: "일기 조회 성공",
 
 
+    SEND_EMAIL_FAIL: "메일 전송 실패",
+    SEND_EMAIL_SUCCESS:"메일 전송 성공",
+    UNDEFINED_EMAIL: "저장된 이메일이 아닙니다."
+
+
 };
