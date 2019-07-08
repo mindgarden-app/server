@@ -29,6 +29,8 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     UPDATE_DIARY_FAIL:"diary update fail",
     BALLOON_SELECT_FAIL:"balloon select fail",
     TREENUM_FAIL:"treeNum 가져오기 fail",
+    GROSS_INSERT_SUCCESS:"잡초 심기 성공",
+    GROSS_INSERT_FAIL:"잡초 심기 실패",
 
     DIARY_DELETE_SUCCESS: "일기 삭제 성공",
     DIARY_DELETE_FAIL: "일기 삭제 실패",
