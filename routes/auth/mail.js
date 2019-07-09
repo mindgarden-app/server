@@ -16,15 +16,18 @@ const rand = Math.floor(Math.random() * 10000)+1000;
 
 //유효한 email인지 확인
 router.get('/', async (req, res,) => {
-    const selectEmailQuery = 'SELECT email FROM user WHERE email = ?';
-    const selectEmailResult = await db.queryParam_Arr(selectEmailQuery, req.body.email);
+    const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
+    const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.body.userIdx);
 
-    console.log(selectEmailResult);
-    
-    if(selectEmailResult.length != 0){
+    if(selectEmailResult.length == 0){
+        console.log(2);
+        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.UNDEFINED_EMAIL));
+        console.log("Undefined User's MAIL");
         
+    } else{
+        console.log(1);
         const from = 'MINDGARDEN';
-        const to = req.body.email;
+        const to = selectEmailResult[0]['email'];
         const subject = 'MINDGARDEN 인증 메일입니다';
         const html = '<p>인증번호는 '+ rand + ' 입니다.\n';
         
@@ -58,15 +61,12 @@ router.get('/', async (req, res,) => {
                 console.log("메일 전송 완료");
             }
             transporter.close();
-        }
-    );
-    //매일 성공 통신
-    res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS));
-            }
-    else{
-    res.status(200).send(utils.successTrue(statusCode.OK, resMessage.UNDEFINED_EMAIL));
-    console.log("Undefined User's MAIL");
+        });
+
+        //매일 성공 통신
+        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS));
     }
+    
 });
 module.exports = router;
     
