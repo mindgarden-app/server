@@ -15,9 +15,14 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
         const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
         const insertBalloonQuery = 'INSERT INTO balloon (userIdx, `check`, balloon) VALUES (?, ?, ?)';
         const insertTransaction = await db.Transaction(async(connection) => {
-            var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
-            const diary_img = req.file.location;
-            const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, diary_img]);
+            if(req.file == undefined){
+                var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, null]);
+            } else{
+                var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                const diary_img = req.file.location;
+                const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, diary_img]);
+            }
             const insertBalloonResult = await db.queryParam_Parse(insertBalloonQuery, [req.body.userIdx, 0, 1]);
         });
         if (!insertTransaction) {//새로운 유저 트랜잭션
@@ -37,12 +42,17 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
             const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
             const updateBalloonQuery = 'UPDATE balloon SET `check`= 0 , `balloon`= 1 WHERE userIdx = ?';
             const insertTransaction_ = await db.Transaction(async(connection) => {
-                var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
-                const diary_img = req.file.location;
-                const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, diary_img]);
+                if(req.file == undefined){
+                    var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                    const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, null]);
+                } else{
+                    var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                    const diary_img = req.file.location;
+                    const insertDiaryResult = await db.queryParam_Parse(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.body.userIdx, diary_img]);
+                }
                 const updateBalloonResult = await db.queryParam_Parse(updateBalloonQuery, [req.body.userIdx]);
             });
-            if (insertTransaction_ == 0) {//기존 유저 트랜잭션
+            if (!insertTransaction_) {//기존 유저 트랜잭션
                 res.status(200).send(util.successFalse(statusCode.OK, resMessage.EXIST_USER_FAIL));
             } else {
                 const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
