@@ -8,10 +8,10 @@ const resMessage = require('../../module/responseMessage');
 
 
 //URI: diarylist/delete
-router.delete('/', async (req, res) => {
+router.delete('/:userIdx/:date', async (req, res) => {
     try{
-        const userIdx = req.body.userIdx;
-        const date = req.body.date;
+        const userIdx = req.params.userIdx;
+        const date = req.params.date;
 
         const deleteDiary = 'DELETE FROM diary WHERE userIdx= ? AND date LIKE ? ';
 

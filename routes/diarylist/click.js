@@ -7,10 +7,10 @@ const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 
 //URI: diarylist/click
-router.get('/', async(req, res) => {
+router.get('/:userIdx/:date', async(req, res) => {
     try{
-        const userIdx = req.body.userIdx;
-        const date = req.body.date;
+        const userIdx = req.params.userIdx;
+        const date = req.params.date;
         const getDiaryQuery = 'SELECT * FROM diary WHERE userIdx = ? AND date LIKE ?';
         const getDiaryResult = await db.queryParam_Parse(getDiaryQuery, [userIdx, date+'%']);
 
