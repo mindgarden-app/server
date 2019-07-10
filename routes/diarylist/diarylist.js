@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
     try{
         const userIdx = req.body.userIdx;
         const date = req.body.date;
-        const getDiaryQuery = 'SELECT * FROM diary WHERE userIdx = ? AND date LIKE ? ORDER BY date DESC';
+        const getDiaryQuery = 'SELECT * FROM diary WHERE userIdx = ? AND date LIKE ?';
         const getDiaryResult = await db.queryParam_Arr(getDiaryQuery, [userIdx, date+'%']);
 
             if (!getDiaryResult) {

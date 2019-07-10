@@ -6,14 +6,12 @@ const util = require('../../module/utils');
 const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 
-
 //URI: diarylist/click
 router.get('/', async(req, res) => {
     try{
-        const diaryIdx=req.body.diaryIdx;
         const userIdx = req.body.userIdx;
         const date = req.body.date;
-        const getDiaryQuery = 'SELECT * FROM diary JOIN weather ON weather.weatherIdx = diary.weatherIdx WHERE userIdx= ? AND date LIKE ?';
+        const getDiaryQuery = 'SELECT * FROM diary WHERE userIdx = ? AND date LIKE ?';
         const getDiaryResult = await db.queryParam_Parse(getDiaryQuery, [userIdx, date+'%']);
 
             if (getDiaryResult==0) {
