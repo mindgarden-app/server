@@ -28,14 +28,7 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
         if (!insertTransaction) {//새로운 유저 트랜잭션
             res.status(200).send(util.successFalse(statusCode.OK, resMessage.NEW_USER_FAIL));
         } else {
-            const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
-            var diary_date = moment().format("YYYY-MM-DD");//년, 월, 일
-            const getDiaryResult=await db.queryParam_Parse(getDiaryQuery, [req.body.userIdx, diary_date+'%']);
-            if (getDiaryResult.length == 0) {//트랜잭션 commit, get fail
-                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_GET_FAIL));
-            } else {
-                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_GET_SUCCESS, getDiaryResult));
-            }
+            res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS));
         }
     } else {
         if(selectCheckResult[0]['check'] == 2){//기존 유저-->등록 성공(update)-->diary insert, balloon update
@@ -55,15 +48,8 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
             if (!insertTransaction_) {//기존 유저 트랜잭션
                 res.status(200).send(util.successFalse(statusCode.OK, resMessage.EXIST_USER_FAIL));
             } else {
-                const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
-                var diary_date = moment().format("YYYY-MM-DD");//년, 월, 일
-                const getDiaryResult=await db.queryParam_Parse(getDiaryQuery, [req.body.userIdx, diary_date+'%']);
-                if (getDiaryResult.length == 0) {//트랜잭션 commit, get fail
-                    res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_GET_FAIL));
-                } else {
-                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_GET_SUCCESS, getDiaryResult));
+                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS));
                 }
-            }
         } else{
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.ALREADY_WRITE));
         }

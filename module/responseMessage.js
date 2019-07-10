@@ -31,6 +31,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     TREENUM_FAIL:"treeNum 가져오기 fail",
     GROSS_INSERT_SUCCESS:"잡초 심기 성공",
     GROSS_INSERT_FAIL:"잡초 심기 실패",
+    DIARY_SAVE_SUCCESS:"diary 등록 성공!",
+    DIARY_UPDATE_SUCCESS:"diary 수정 성공!",
+
 
     DIARY_DELETE_SUCCESS: "일기 삭제 성공",
     DIARY_DELETE_FAIL: "일기 삭제 실패",

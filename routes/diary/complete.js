@@ -17,14 +17,8 @@ router.put('/', upload.single('diary_img'), async(req, res) => {
             res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.UPDATE_DIARY_FAIL));
         } else {
             console.log(2);
-            const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
-            const getDiaryResult=await db.queryParam_Parse(getDiaryQuery, [req.body.userIdx, req.body.date+'%']);
-            if (getDiaryResult.length == 0) {
-                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_GET_FAIL));
-            } else {
-                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_GET_SUCCESS, getDiaryResult));
+            res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_UPDATE_SUCCESS));
             }
-        }
     } else {//이미지 있음
         const diary_img = req.file.location;
         const updateDiaryResult = await db.queryParam_Parse(updateDiaryQuery,[req.body.diary_content, req.body.weatherIdx, diary_img, req.body.userIdx, req.body.date+'%']);
@@ -33,15 +27,9 @@ router.put('/', upload.single('diary_img'), async(req, res) => {
             res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.UPDATE_DIARY_FAIL));
         } else {
             console.log(4);
-            const getDiaryQuery = 'SELECT diary_content, diary_img, weatherIdx, date FROM diary WHERE userIdx = ? AND date LIKE ?';
-            const getDiaryResult=await db.queryParam_Parse(getDiaryQuery, [req.body.userIdx, req.body.date+'%']);
-            if (getDiaryResult.length == 0) {
-                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_GET_FAIL));
-            } else {
-                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_GET_SUCCESS, getDiaryResult));
+            res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_UPDATE_SUCCESS));
             }
         }
-    }
 });
 
 module.exports = router;
