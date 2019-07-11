@@ -27,7 +27,7 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
         });
         if (insertTransaction != 'Success') {//새로운 유저 트랜잭션
             console.log("1");
-            res.status(200).send(util.successFalse(statusCode.OK, resMessage.NEW_USER_FAIL));
+            res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.NEW_USER_FAIL));
         } else {
             console.log("2");
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS));
@@ -48,12 +48,12 @@ router.post('/', upload.single('diary_img'), async(req, res) => {
                 const updateBalloonResult = await connection.query(updateBalloonQuery, [req.body.userIdx]);
             });
             if (insertTransaction_ != 'Success') {//기존 유저 트랜잭션
-                res.status(200).send(util.successFalse(statusCode.OK, resMessage.EXIST_USER_FAIL));
+                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.EXIST_USER_FAIL));
             } else {
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS));
                 }
         } else{
-            res.status(200).send(util.successTrue(statusCode.OK, resMessage.ALREADY_WRITE));
+            res.status(200).send(util.successTrue(statusCode.NO_CONTENT, resMessage.ALREADY_WRITE));//안드 부탁...
         }
     }
 });
