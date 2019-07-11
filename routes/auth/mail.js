@@ -11,14 +11,14 @@ const nodemailer = require('nodemailer');
 const smtpPool = require('nodemailer-smtp-pool');
 const mailinfo = require('../../config/mailconfig');
 
-//인증번호 값
-const rand = Math.floor(Math.random() * 10000)+1000;
 
 //유효한 email인지 확인
-router.get('/', async (req, res,) => {
+router.get('/:userIdx', async (req, res,) => {
     const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
-    const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.body.userIdx);
+    const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.params.userIdx);
 
+    const rand = Math.floor(Math.random() * 10000)+1000;
+    
     if(selectEmailResult.length == 0){
         console.log(2);
         res.status(200).send(utils.successTrue(statusCode.OK, resMessage.UNDEFINED_EMAIL));
