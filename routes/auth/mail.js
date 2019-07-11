@@ -17,8 +17,8 @@ router.get('/:userIdx', async (req, res,) => {
     const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
     const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.params.userIdx);
 
-    const rand = this.toString(Math.floor(Math.random() * 10000)+1000);
-
+    const rand = Math.floor(Math.random() * 10000)+1000;
+    const rand_final = rand.toString();
 
     if(selectEmailResult.length == 0){
         console.log(2);
@@ -65,7 +65,7 @@ router.get('/:userIdx', async (req, res,) => {
         });
 
         //매일 성공 통신
-        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS, rand));
+        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS, rand_final));
     }
     
 });
