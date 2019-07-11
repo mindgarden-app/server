@@ -27,7 +27,7 @@ router.get('/:userIdx/:date', async(req, res)=>{
                     const insertGardenResult_3 = await connection.query(insertGardenQuery_3, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
-                    res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));
+                    res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
                     const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
@@ -53,7 +53,7 @@ router.get('/:userIdx/:date', async(req, res)=>{
                     const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
-                    res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));
+                    res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
                     const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
@@ -77,7 +77,7 @@ router.get('/:userIdx/:date', async(req, res)=>{
                     const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
-                    res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));
+                    res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
                     const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
