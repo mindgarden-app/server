@@ -22,9 +22,9 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_3 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await db.queryParam_Parse(insertGardenQuery_1, [req.params.date+'-01 Mon', 5, 16, req.params.userIdx]);
-                    const insertGardenResult_2 = await db.queryParam_Parse(insertGardenQuery_2, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
-                    const insertGardenResult_3 = await db.queryParam_Parse(insertGardenQuery_3, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 5, 16, req.params.userIdx]);
+                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
+                    const insertGardenResult_3 = await connection.query(insertGardenQuery_3, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));
@@ -49,8 +49,8 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await db.queryParam_Parse(insertGardenQuery_1, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
-                    const insertGardenResult_2 = await db.queryParam_Parse(insertGardenQuery_2, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
+                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));
@@ -74,7 +74,7 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 console.log(4);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await db.queryParam_Parse(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.OK, resMessage.GROSS_INSERT_FAIL));

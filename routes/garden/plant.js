@@ -20,8 +20,8 @@ router.post('/', async(req, res) => {
                 const updateBalloonQuery = 'UPDATE balloon SET `check` = 1 , `balloon` = 0 WHERE userIdx = ?';
                 const insertTransaction = await db.Transaction(async(connection) => {
                     const garden_date = moment().format("YYYY-MM-DD ddd");
-                    const insertGardenResult = await db.queryParam_Parse(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.body.userIdx]);
-                    const updateBalloonResult = await db.queryParam_Parse(updateBalloonQuery,[req.body.userIdx]);
+                    const insertGardenResult = await connection.query(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.body.userIdx]);
+                    const updateBalloonResult = await connection.query(updateBalloonQuery,[req.body.userIdx]);
                 });
                 if (insertTransaction == 0) {
                     res.status(200).send(util.successFalse(statusCode.OK, resMessage.PLANT_FAIL));

@@ -23,7 +23,7 @@ router.get('/', async (req, res,) => {
         console.log(2);
         res.status(200).send(utils.successTrue(statusCode.OK, resMessage.UNDEFINED_EMAIL));
         console.log("Undefined User's MAIL");
-        
+
     } else{
         console.log(1);
         const from = 'MINDGARDEN';
@@ -64,7 +64,7 @@ router.get('/', async (req, res,) => {
         });
 
         //매일 성공 통신
-        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS));
+        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS, rand));
     }
     
 });
