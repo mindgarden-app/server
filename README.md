@@ -13,6 +13,8 @@
 
 ------
 
+##Workflow
+![](https://jungah.s3.ap-northeast-2.amazonaws.com/WORKFLOW_ANDROID.pdf)
 
 
 ## 주요기능
