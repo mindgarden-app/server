@@ -17,7 +17,7 @@ router.get('/:userIdx', async (req, res,) => {
     const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
     const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.params.userIdx);
 
-    const rand = Math.floor(Math.random() * 10000)+1000;
+    const rand = Math.floor(Math.random() * 9000)+1000;
     const rand_final = rand.toString();
 
     if(selectEmailResult.length == 0){
