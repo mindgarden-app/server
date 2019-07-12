@@ -13,8 +13,8 @@
 
 ------
 
-##Workflow
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/WORKFLOW_ANDROID.pdf)
+## Workflow
+![](https://jungah.s3.ap-northeast-2.amazonaws.com/KakaoTalk_Photo_2019-07-12-21-16-29.png)
 
 
 ## 주요기능
