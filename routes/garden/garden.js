@@ -97,8 +97,14 @@ router.get('/:userIdx/:date', async(req, res)=>{
         } else if(getGardenResult[(getGardenResult.length)-1]['treeIdx'] > 15){//잡초만 있는 경우 
             const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
             const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.params.userIdx]);
-            if (getBalloonResult.length == 0) {
-                res.status(200).send(util.successTrue(statusCode.OK, resMessage.BALLOON_SELECT_FAIL));
+            if (getBalloonResult.length == 0) {//완전 처음 쓰는 사람
+                for(i=0;i<getGardenResult.length;i++){//balloon 추가
+                    getGardenResult[i]['balloon']=0;
+                }
+                for(i=0;i<getGardenResult.length;i++){
+                    getGardenResult[i]['treeNum']=0;
+                }
+                res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             } else {
                 for(i=0;i<getGardenResult.length;i++){//balloon 추가
                     getGardenResult[i]['balloon']=getBalloonResult[0]['balloon'];
