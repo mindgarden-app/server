@@ -16,6 +16,7 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     USER_INSERT_FAIL: 'user insert fail',
     SIGNUP_SUCCESS: '회원 가입 성공',
     SIGNUP_FAIL: '중복된 email이 존재합니다.',
+    REFRESH_UPDATE_ERROR:'refresh update fail',
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",
