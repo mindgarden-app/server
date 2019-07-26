@@ -5,12 +5,12 @@ const db = require('../../module/pool');
 const util = require('../../module/utils');
 const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
-
+const authUtil = require("../../module/authUtils");
 
 //URI: diarylist/delete
-router.delete('/:userIdx/:date', async (req, res) => {
+router.delete('/:userIdx/:date', authUtil.isLoggedin, async (req, res) => {
     try{
-        const userIdx = req.params.userIdx;
+        const userIdx = req.decoded.idx;
         const date = req.params.date;
 
         const deleteDiary = 'DELETE FROM diary WHERE userIdx= ? AND date LIKE ? ';

@@ -11,6 +11,8 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     LOGIN_SUCCESS: "로그인 성공",
     LOGIN_FAIL: "로그인 실패",
     DB_ERROR:"db error",
+    REFRESH_UPDATE_ERROR: 'refreshtoken DB등록 오류',
+    NOT_CORRECT_REFRESH_TOKEN: 'refreshtoken이 만료되었습니다.',
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",

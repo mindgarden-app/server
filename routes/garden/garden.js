@@ -6,12 +6,13 @@ const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
 const upload = require('../../config/multer');
 const moment = require('moment');
+const authUtil = require("../../module/authUtils");
 
 //메인
-router.get('/:userIdx/:date', async(req, res)=>{
+router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
     try{
         const getGardenQuery = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
-        const getGardenResult = await db.queryParam_Parse(getGardenQuery,[req.params.userIdx, req.params.date+'%']);
+        const getGardenResult = await db.queryParam_Parse(getGardenQuery,[req.decoded.idx, req.params.date+'%']);
         if (getGardenResult.length == 0) {
             //잡초 심기
             console.log(1);
@@ -22,15 +23,15 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_3 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 5, 16, req.params.userIdx]);
-                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
-                    const insertGardenResult_3 = await connection.query(insertGardenQuery_3, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 5, 16, req.decoded.idx]);
+                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 21, 16, req.decoded.idx]);
+                    const insertGardenResult_3 = await connection.query(insertGardenQuery_3, [req.params.date+'-01 Mon', 30, 16, req.decoded.idx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
-                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
+                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.decoded.idx, req.params.date+'%']);
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
@@ -49,14 +50,14 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 21, 16, req.params.userIdx]);
-                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 21, 16, req.decoded.idx]);
+                    const insertGardenResult_2 = await connection.query(insertGardenQuery_2, [req.params.date+'-01 Mon', 30, 16, req.decoded.idx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
-                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
+                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.decoded.idx, req.params.date+'%']);
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
@@ -74,13 +75,13 @@ router.get('/:userIdx/:date', async(req, res)=>{
                 console.log(4);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
-                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.params.userIdx]);
+                    const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.decoded.idx]);
                 });
                 if (insertTransaction == 0) {//잡초 insert fail
                     res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GROSS_INSERT_FAIL));
                 } else {
                     const getGardenQuery_ = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
-                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.params.userIdx, req.params.date+'%']);
+                    const getGardenResult_ = await db.queryParam_Parse(getGardenQuery_,[req.decoded.idx, req.params.date+'%']);
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
@@ -96,7 +97,7 @@ router.get('/:userIdx/:date', async(req, res)=>{
             }
         } else if(getGardenResult[(getGardenResult.length)-1]['treeIdx'] > 15){//잡초만 있는 경우 
             const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
-            const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.params.userIdx]);
+            const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//완전 처음 쓰는 사람
                 for(i=0;i<getGardenResult.length;i++){//balloon 추가
                     getGardenResult[i]['balloon']=0;
@@ -116,12 +117,12 @@ router.get('/:userIdx/:date', async(req, res)=>{
             }
         } else {
             const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
-            const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.params.userIdx]);
+            const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//garden 성공, balloon 실패
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.BALLOON_SELECT_FAIL));
             } else {
                 const getTreeNumQuery = 'SELECT count(*) AS treeNum FROM garden WHERE userIdx = ? AND treeIdx <= 15 AND date LIKE ?';
-                const getTreeNumResult = await db.queryParam_Parse(getTreeNumQuery ,[req.params.userIdx, req.params.date+'%']);
+                const getTreeNumResult = await db.queryParam_Parse(getTreeNumQuery ,[req.decoded.idx, req.params.date+'%']);
                 if(getTreeNumResult.length == 0){
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.TREENUM_FAIL));
                 } else{//셋 다 성공

@@ -6,11 +6,12 @@ const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
 const upload = require('../../config/multer');//post할때 필요
 const moment = require('moment');
+const authUtil = require("../../module/authUtils");
 
 //심기
-router.post('/', async(req, res) => {
+router.post('/', authUtil.isLoggedin, async(req, res) => {
         const getCheckQuery = 'SELECT `check` FROM balloon WHERE userIdx= ?';
-        const getCheckResult = await db.queryParam_Parse(getCheckQuery,[req.body.userIdx]);
+        const getCheckResult = await db.queryParam_Parse(getCheckQuery,[req.decoded.idx]);
         if(getCheckResult.length == 0){//새로운 유저-->심을 수 없음
             console.log("new");
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.WRITE_DIARY));
@@ -20,8 +21,8 @@ router.post('/', async(req, res) => {
                 const updateBalloonQuery = 'UPDATE balloon SET `check` = 1 , `balloon` = 0 WHERE userIdx = ?';
                 const insertTransaction = await db.Transaction(async(connection) => {
                     const garden_date = moment().format("YYYY-MM-DD ddd");
-                    const insertGardenResult = await connection.query(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.body.userIdx]);
-                    const updateBalloonResult = await connection.query(updateBalloonQuery,[req.body.userIdx]);
+                    const insertGardenResult = await connection.query(insertGardenQuery, [garden_date, req.body.location, req.body.treeIdx, req.decoded.idx]);
+                    const updateBalloonResult = await connection.query(updateBalloonQuery,[req.decoded.idx]);
                 });
                 if (insertTransaction == 0) {
                     res.status(200).send(util.successFalse(statusCode.OK, resMessage.PLANT_FAIL));
