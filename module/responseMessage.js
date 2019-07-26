@@ -13,6 +13,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     DB_ERROR:"db error",
     REFRESH_UPDATE_ERROR: 'refreshtoken DB등록 오류',
     NOT_CORRECT_REFRESH_TOKEN: 'refreshtoken이 만료되었습니다.',
+    USER_INSERT_FAIL: 'user insert fail',
+    SIGNUP_SUCCESS: '회원 가입 성공',
+    SIGNUP_FAIL: '중복된 email이 존재합니다.',
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",

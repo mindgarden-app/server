@@ -9,7 +9,7 @@ const db = require('../../module/pool');
 const jwtUtils = require('../../module/jwt');
 
 
-//body-id, password
+//body-e-mail, password
 router.post('/', async(req, res) => {
     if (req.body.idx === null || !req.body.grade || !req.body.name) {//하나라도 값이 비어있으면 안된다.
         res.status(statusCode.OK).send(util.successFalse(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
@@ -17,7 +17,7 @@ router.post('/', async(req, res) => {
         const selectIdQuery = 'SELECT * FROM user WHERE id = ?'
         const selectIdResult = await db.queryParam_Parse(selectIdQuery, req.body.id);
     
-        if(selectIdResult[0]==null){
+        if(selectIdResult[0] == null){
             //console.log("ID가 존재하지 않거나 비밀번호가 일치하지 않습니다._id없음");
             res.status(200).send(util.successFalse(statusCode.OK, resMessage.NO_USER));
         }else{
