@@ -31,7 +31,7 @@ router.post('/', async(req, res) => {
                 if (refreshTokenUpdateResult.length == 0) {
                     res.status(200).send(util.successTrue(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
                 } else {
-                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, tokens)); //data로 userIdx찍어줌.
+                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, tokens)); //token, refreshtoken 찍어줌
                 }
             }else{//비밀번호 불일치
                 res.status(200).send(util.successFalse(statusCode.OK, resMessage.MISS_MATCH_PW));
