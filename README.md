@@ -61,7 +61,7 @@
 
 ## ERD
 
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2019-07-11+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.58.12.png)
+![](/Users/jungahshin/Desktop/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202019-07-11%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%209.58.12.png)
 
 
 
@@ -71,7 +71,7 @@
 
 # Server Architecture
 
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2019-07-10+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+11.04.04.png)
+![](/Users/jungahshin/Desktop/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202019-07-10%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.04.04.png)
 
 
 
