@@ -3,12 +3,12 @@ const jwt = require('jsonwebtoken');
 const secretOrPrivateKey = "jwtSecretKey!";
 const options = {
     algorithm: "HS256",
-    expiresIn: "7d",//1주
+    expiresIn: "1h",//1주
     issuer: "jungah"
 };
 const refreshOptions = {//Refreshoptions????????
     algorithm: "HS256",
-    expiresIn: "24h * 14",//2주
+    expiresIn: "2h",//2주
     issuer: "jungah"
 };
 

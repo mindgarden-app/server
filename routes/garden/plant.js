@@ -30,6 +30,7 @@ router.post('/', authUtil.isLoggedin, async(req, res) => {
                     const balloon_result=[];
                     var json = new Object();
                     json.balloon = 0;
+                    json.check = 1;
                     balloon_result.push(json);
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.PLANT_SUCCESS, balloon_result));
                 }

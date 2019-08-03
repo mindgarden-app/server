@@ -9,7 +9,7 @@ const moment = require('moment');
 const authUtil = require("../../module/authUtils");
 
 //메인
-router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
+router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
     try{
         const getGardenQuery = 'SELECT date, location, treeIdx FROM garden WHERE userIdx= ? AND date LIKE ?';
         const getGardenResult = await db.queryParam_Parse(getGardenQuery,[req.decoded.idx, req.params.date+'%']);
@@ -41,6 +41,9 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
+                        for(i=0;i<getGardenResult_.length;i++){
+                            getGardenResult_[i]['check']=2;
+                        }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
@@ -67,6 +70,9 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
+                        for(i=0;i<getGardenResult_.length;i++){
+                            getGardenResult_[i]['check']=2;
+                        }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
@@ -91,12 +97,15 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
+                        for(i=0;i<getGardenResult_.length;i++){
+                            getGardenResult_[i]['check']=2;
+                        }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
             }
         } else if(getGardenResult[(getGardenResult.length)-1]['treeIdx'] > 15){//잡초만 있는 경우 
-            const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
+            const getBalloonQuery = 'SELECT balloon, `check` FROM balloon WHERE userIdx = ?';
             const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//완전 처음 쓰는 사람
                 for(i=0;i<getGardenResult.length;i++){//balloon 추가
@@ -104,6 +113,9 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                 }
                 for(i=0;i<getGardenResult.length;i++){
                     getGardenResult[i]['treeNum']=0;
+                }
+                for(i=0;i<getGardenResult.length;i++){
+                    getGardenResult[i]['check']=2;
                 }
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             } else {
@@ -113,10 +125,13 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                 for(i=0;i<getGardenResult.length;i++){
                     getGardenResult[i]['treeNum']=0;
                 }
+                for(i=0;i<getGardenResult.length;i++){
+                    getGardenResult[i]['check']=getBalloonResult[0]['check'];
+                }
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             }
         } else {
-            const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
+            const getBalloonQuery = 'SELECT balloon, `check` FROM balloon WHERE userIdx = ?';
             const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//garden 성공, balloon 실패
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.BALLOON_SELECT_FAIL));
@@ -131,6 +146,9 @@ router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res)=>{
                     }
                     for(i=0;i<getGardenResult.length;i++){
                         getGardenResult[i]['treeNum']=getTreeNumResult[0]['treeNum'];
+                    }
+                    for(i=0;i<getGardenResult.length;i++){
+                        getGardenResult[i]['check']=getBalloonResult[0]['check'];
                     }
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
                 }

@@ -9,6 +9,7 @@
     "aws-sdk": "^2.488.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
+    "crypto-promise": "^2.1.0",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "^1.16.2",
@@ -24,6 +25,7 @@
     "nodemailer-smtp-pool": "^2.8.3",
     "passport": "^0.4.0",
     "passport-kakao": "0.0.5",
-    "promise-mysql": "^3.3.2"
+    "promise-mysql": "^3.3.2",
+    "rand-token": "^0.4.0"
   }
 }

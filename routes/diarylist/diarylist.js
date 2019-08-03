@@ -7,7 +7,7 @@ const resMessage = require('../../module/responseMessage');
 const authUtil = require("../../module/authUtils");
 
 //URI: diarylist
-router.get('/:userIdx/:date', authUtil.isLoggedin, async(req, res) => {
+router.get('/:date', authUtil.isLoggedin, async(req, res) => {
     try{
         const userIdx = req.decoded.idx;
         const date = req.params.date;

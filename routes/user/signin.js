@@ -15,19 +15,17 @@ router.post('/', async(req, res) => {
         res.status(200).send(util.successFalse(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
     } else {
         const selectUserQuery = 'SELECT * FROM user WHERE email = ? AND id = ?'
-        const selectUserResult = await db.queryParam_Parse(selectUserQuery, [req.body.email, null]);
-    
-        if(selectUserResult[0] == null){//해당 email을 가진 사용자 없음
+        const selectUserResult = await db.queryParam_Parse(selectUserQuery, [req.body.email, 1]);
+        if(selectUserResult.length == 0){//해당 email을 가진 사용자 없음
             res.status(200).send(util.successFalse(statusCode.OK, resMessage.NO_USER));
         }else{
             const salt = selectUserResult[0].salt;
             const hashedEnterPw = await crypto.pbkdf2(req.body.password.toString(),salt,1000, 32, 'SHA512');
-            
             if(selectUserResult[0].password == hashedEnterPw.toString('base64')){
                 const tokens = jwtUtils.sign(selectUserResult[0]);
                 const refreshToken = tokens.refreshToken;
                 const refreshTokenUpdateQuery = "UPDATE user SET refresh_token = ? WHERE email = ? AND id = ?";
-                const refreshTokenUpdateResult = await db.queryParam_Parse(refreshTokenUpdateQuery, [refreshToken, req.body.id, null]);
+                const refreshTokenUpdateResult = await db.queryParam_Parse(refreshTokenUpdateQuery, [refreshToken, req.body.email, 1]);
                 if (refreshTokenUpdateResult.length == 0) {
                     res.status(200).send(util.successTrue(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
                 } else {

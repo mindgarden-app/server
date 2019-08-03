@@ -59,5 +59,4 @@ router.post('/', upload.single('diary_img'), authUtil.isLoggedin, async(req, res
     }
 });
 
-
 module.exports = router;

@@ -8,7 +8,7 @@ const resMessage = require('../../module/responseMessage');
 const authUtil = require("../../module/authUtils");
 
 //URI: diarylist/delete
-router.delete('/:userIdx/:date', authUtil.isLoggedin, async (req, res) => {
+router.delete('/:date', authUtil.isLoggedin, async (req, res) => {
     try{
         const userIdx = req.decoded.idx;
         const date = req.params.date;
