@@ -10,12 +10,13 @@ const statusCode = require('../../module/statusCode');
 const nodemailer = require('nodemailer');
 const smtpPool = require('nodemailer-smtp-pool');
 const mailinfo = require('../../config/mailconfig');
+const authUtil = require("../../module/authUtils");
 
 
 //유효한 email인지 확인
-router.get('/:userIdx', async (req, res,) => {
+router.get('/', authUtil.isLoggedin, async (req, res,) => {
     const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
-    const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.params.userIdx);
+    const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.decoded.idx);
 
     const rand = Math.floor(Math.random() * 9000)+1000;
     const rand_final = rand.toString();
