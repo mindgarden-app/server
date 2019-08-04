@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const crypto = require('crypto-promise');
-const util = require('../../module/utils');
+const utils = require('../../module/utils');
 const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
@@ -16,13 +16,18 @@ router.get('/', async (req, res) => {
     const selectUserResult = await db.queryParam_Parse(selectUserQuery, refreshToken);
 
     if (!selectUserResult) {// DB오류
-        res.status(200).send(defaultRes.successFalse(statusCode.DB_ERROR, resMessage.DB_ERROR));
+        res.status(200).send(utils.successFalse(statusCode.DB_ERROR, resMessage.DB_ERROR));
     } else {
         if (selectUserResult[0] == null) {
-            res.status(200).send(defaultRes.successFalse(statusCode.OK, resMessage.NOT_CORRECT_REFRESH_TOKEN_USER));
+            res.status(200).send(utils.successFalse(statusCode.OK, resMessage.INVALID_TOKEN));
         } else {
             const newAccessToken = jwtUtils.refresh(selectUserResult[0]);
-            res.status(statusCode.OK).send(defaultRes.successTrue(statusCode.OK, resMessage.REFRESH_TOKEN, newAccessToken));
+            const token_result = [];
+            var json = new Object();
+            json.token = newAccessToken;
+            token_result.push(json);
+            //그리고 서버에서는 새롭게 발급한 newAccessToken의 refreshToken을 디비에 update한다.
+            res.status(statusCode.OK).send(utils.successTrue(statusCode.OK, resMessage.REFRESH_TOKEN, token_result));
         }
     }
 });

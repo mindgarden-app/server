@@ -46,7 +46,7 @@ module.exports = {
         return decoded;//error가 없을 시에 decoded로 return을 한다. 
     },
 
-    refresh: (user) => {
+    refresh: (user) => {//refresh를 통해 accessToken만을 발급
         const payload = {
             idx: user.userIdx,
         };

@@ -32,7 +32,9 @@ router.get('/login/fail', (req, res) => {
 router.get('/login/success', (req, res) => {
     console.log("===========");
     console.log(req._passport.session.user);
-    res.status(200).send(utils.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, req._passport.session.user));
+    const user_result = [];
+    user_result.push(req._passport.session.user);
+    res.status(200).send(utils.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, user_result));
 });
 
 module.exports = router;
