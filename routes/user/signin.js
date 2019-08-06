@@ -9,7 +9,7 @@ const db = require('../../module/pool');
 const jwtUtils = require('../../module/jwt');
 
 
-//body-e-mail, password
+//body-email, password
 router.post('/', async(req, res) => {
     if (!req.body.email || !req.body.password) {
         res.status(200).send(util.successFalse(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
@@ -29,7 +29,9 @@ router.post('/', async(req, res) => {
                 if (refreshTokenUpdateResult.length == 0) {
                     res.status(200).send(util.successTrue(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
                 } else {
-                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, tokens)); //token, refreshtoken 찍어줌
+                    const token_result = [];
+                    token_result.push(tokens);
+                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, token_result)); //token, refreshtoken 찍어줌
                 }
             }else{//비밀번호 불일치
                 res.status(200).send(util.successFalse(statusCode.OK, resMessage.MISS_MATCH_PW));

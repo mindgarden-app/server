@@ -8,7 +8,7 @@ const statusCode = require('../../module/statusCode');
 const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
 
-//body-name, pw, e-mail
+//body-name, password, email
 router.post('/', async (req, res) => {
     const selectUserQuery = 'SELECT * FROM user WHERE email = ? AND `id` = ?'
     const selectUserResult = await db.queryParam_Parse(selectUserQuery, [req.body.email, 1]);
