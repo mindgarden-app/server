@@ -30,7 +30,14 @@ router.post('/', async(req, res) => {
                     res.status(200).send(util.successTrue(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
                 } else {
                     const token_result = [];
-                    token_result.push(tokens);
+                    var json = new Object();
+                    json.token = tokens.token;
+                    json.refreshToken = tokens.refreshToken;
+                    //email, name, expires_in 추가하기
+                    json.email = req.body.email;
+                    json.name = selectUserResult[0].name;
+                    json.expires_in = 3600;
+                    token_result.push(json);
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, token_result)); //token, refreshtoken 찍어줌
                 }
             }else{//비밀번호 불일치
