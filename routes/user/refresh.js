@@ -8,7 +8,7 @@ const resMessage = require('../../module/responseMessage');
 const db = require('../../module/pool');
 const jwtUtils = require('../../module/jwt');
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 
     const refreshToken = req.headers.refreshtoken;
 
