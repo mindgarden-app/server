@@ -21,6 +21,7 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     EXPRIED_TOKEN:'만료된 토큰입니다.',
     INVALID_TOKEN:'잘못된 형식의 토큰입니다.',
     REFRESH_TOKEN:'토큰 발급 완료!',
+    UPDATE_PW_FAIL:'update password fail',
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",
