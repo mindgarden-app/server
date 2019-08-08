@@ -11,11 +11,12 @@ const nodemailer = require('nodemailer');
 const smtpPool = require('nodemailer-smtp-pool');
 const mailinfo = require('../../config/mailconfig');
 const authUtil = require("../../module/authUtils");
+const crypto = require('crypto-promise');
 
 
 //유효한 email인지 확인
 router.get('/', authUtil.isLoggedin, async (req, res,) => {
-    const selectEmailQuery = 'SELECT email FROM user WHERE userIdx = ?';
+    const selectEmailQuery = 'SELECT * FROM user WHERE userIdx = ?';
     const selectEmailResult = await db.queryParam_Parse(selectEmailQuery, req.decoded.idx);
 
     const rand = Math.floor(Math.random() * 9000)+1000;
@@ -29,7 +30,7 @@ router.get('/', authUtil.isLoggedin, async (req, res,) => {
     } else{
         console.log(1);
         const from = 'MINDGARDEN';
-        const to = selectEmailResult[0]['email'];
+        const to = selectEmailResult[0].email;
         const subject = 'MINDGARDEN 인증 메일입니다';
         const html = '<p>인증번호는 '+ rand + ' 입니다.\n';
         
@@ -64,10 +65,18 @@ router.get('/', authUtil.isLoggedin, async (req, res,) => {
             }
             transporter.close();
         });
-
-        //매일 성공 통신
-        res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS, rand_final));
-    }
+        //db 새로운 비밀번호로 update
+        const salt = selectEmailResult[0].salt;
+        const hashedPw = await crypto.pbkdf2(rand_final.toString(), salt, 1000, 32, 'SHA512');
+        const updatePwQuery = 'UPDATE user SET password = ? WHERE userIdx = ?';
+        const updatePwResult = await db.queryParam_Parse(updatePwQuery,[hashedPw.toString('base64'), req.decoded.idx]);
+        if (updatePwResult.length == 0) { 
+            res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.UPDATE_PW_FAIL));
+        } else {
+            //매일 성공 통신
+            res.status(200).send(utils.successTrue(statusCode.OK, resMessage.SEND_EMAIL_SUCCESS, rand_final));
+            }
+        }
     
 });
 module.exports = router;
