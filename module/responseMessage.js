@@ -22,6 +22,8 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     INVALID_TOKEN:'잘못된 형식의 토큰입니다.',
     REFRESH_TOKEN:'토큰 발급 완료!',
     UPDATE_PW_FAIL:'update password fail',
+    USER_DELETE_FAIL:'user 계정 삭제 실패',
+    USER_DELETE_SUCCESS:'user 계정 삭제 성공!',
     
     GARDEN_SELECT_FAIL:"garden select fail",
     GARDEN_SUCCESS:"garden get 성공",
