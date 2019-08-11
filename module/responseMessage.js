@@ -21,7 +21,6 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     EXPRIED_TOKEN:'만료된 토큰입니다.',
     INVALID_TOKEN:'잘못된 형식의 토큰입니다.',
     REFRESH_TOKEN:'토큰 발급 완료!',
-    UPDATE_PW_FAIL:'update password fail',
     USER_DELETE_FAIL:'user 계정 삭제 실패',
     USER_DELETE_SUCCESS:'user 계정 삭제 성공!',
     
@@ -56,7 +55,9 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
 
     SEND_EMAIL_FAIL: "메일 전송 실패",
     SEND_EMAIL_SUCCESS:"메일 전송 성공",
-    UNDEFINED_EMAIL: "저장된 이메일이 아닙니다."
+    UNDEFINED_EMAIL: "저장된 이메일이 아닙니다.",
+    UPDATE_PW_FAIL:'update password fail',
+
 
 
 };
