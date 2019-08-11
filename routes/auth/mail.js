@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const passport = require('passport');
-
 const db = require('../../module/pool');
 const utils = require('../../module/utils');
 const resMessage = require('../../module/responseMessage');
