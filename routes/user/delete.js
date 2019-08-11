@@ -11,9 +11,11 @@ const authUtil = require("../../module/authUtils");
 router.delete('/', authUtil.isLoggedin, async (req, res) => {
     try{
         const userIdx = req.decoded.idx;
+        console.log(userIdx);
 
-        const deleteUser = "DELETE FROM u,b,g,d USING user u INNER JOIN balloon b ON u.userIdx = b.userIdx INNER JOIN garden g ON u.userIdx = g.userIdx "+ 
-        "INNER JOIN diary d ON u.userIdx = d.userIdx WHERE u.userIdx= ?";
+        // const deleteUser = "DELETE FROM user,balloon,garden,diary USING user u JOIN balloon b ON u.userIdx = b.userIdx JOIN garden g ON u.userIdx = g.userIdx "+ 
+        // "JOIN diary d ON u.userIdx = d.userIdx WHERE u.userIdx= ?";
+        const deleteUser = 'DELETE FROM user WHERE userIdx = ?';
 
         const deleteUserResult = await db.queryParam_Parse(deleteUser, userIdx);
 
