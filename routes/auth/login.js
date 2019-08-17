@@ -21,9 +21,6 @@ router.get('/login/kakao/callback',
     })
 );
 
-
-
-
 router.get('/login/fail', (req, res) => {
     res.status(200).send(utils.successFalse(statusCode.INTERNAL_SERVER_ERROR, resMessage.LOGIN_FAIL));
 

@@ -10,6 +10,8 @@ module.exports = {//서버들끼리의 원활한 소통을 위해서 응답메�
     MISS_MATCH_PW: "비밀번호가 맞지 않습니다.",
     LOGIN_SUCCESS: "로그인 성공",
     LOGIN_FAIL: "로그인 실패",
+    LOGOUT_SUCCESS: "로그아웃 성공",
+    LOGOUT_FAIL: "로그아웃 실패",
     DB_ERROR:"db error",
     REFRESH_UPDATE_ERROR: 'refreshtoken DB등록 오류',
     NOT_CORRECT_REFRESH_TOKEN: 'refreshtoken이 만료되었습니다.',
