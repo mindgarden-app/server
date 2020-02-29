@@ -8,16 +8,16 @@ const resMessage = require('../../module/responseMessage');
 const authUtil = require("../../module/authUtils");
 
 //URI: diarylist/delete
-router.delete('/:date', authUtil.isLoggedin, async (req, res) => {
+router.delete('/:diaryIdx', authUtil.isLoggedin, async (req, res) => {
     try{
         const userIdx = req.decoded.idx;
-        const date = req.params.date;
+        const diaryIdx = req.params.diaryIdx;
 
-        const deleteDiary = 'DELETE FROM diary WHERE userIdx= ? AND date LIKE ? ';
+        const deleteDiary = 'DELETE FROM diary WHERE userIdx= ? AND diaryIdx = ? ';
 
-        const deleteDiaryResult = await db.queryParam_Parse(deleteDiary, [userIdx, date+'%'] );
+        const deleteDiaryResult = await db.queryParam_Parse(deleteDiary, [userIdx, diaryIdx] );
 
-        if (!userIdx|!date) {
+        if (!userIdx|!diaryIdx) {
             res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.DIARY_DELETE_FAIL));
         } else {
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_DELETE_SUCCESS));
