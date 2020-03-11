@@ -10,6 +10,19 @@ const smtpPool = require('nodemailer-smtp-pool');
 const mailinfo = require('../../config/mailconfig');
 const crypto = require('crypto-promise');
 
+const arr = "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
+const randomPw = createCode(arr, 8);
+const rand_final = randomPw.toString();
+
+function createCode(objArr, iLength) {
+    var arr = objArr;
+    var randomStr = "";
+    for (var j=0; j<iLength; j++) {
+    randomStr += arr[Math.floor(Math.random()*arr.length)];
+    }
+    return randomStr
+    }
+
 
 //유효한 email인지 확인
 //body-email
@@ -18,8 +31,8 @@ router.post('/', async (req, res,) => {
     const selectUserQuery = 'SELECT * FROM user WHERE email = ? AND id = ?';
     const selectUserResult = await db.queryParam_Parse(selectUserQuery, [req.body.email, 1]);//일반 로그인
 
-    const rand = Math.floor(Math.random() * 9000)+1000;
-    const rand_final = rand.toString();
+    // const rand = Math.floor(Math.random() * 9000)+1000;
+    // const rand_final = rand.toString();
 
     if(selectUserResult.length == 0){
         res.status(200).send(utils.successTrue(statusCode.OK, resMessage.UNDEFINED_EMAIL));//존재하지 않는 이메일
@@ -29,7 +42,7 @@ router.post('/', async (req, res,) => {
         const from = 'MINDGARDEN';
         const to = selectUserResult[0].email;
         const subject = 'MINDGARDEN 인증 메일입니다';
-        const html = '<p>인증번호는 '+ rand + ' 입니다.\n';
+        const html = '<p>인증번호는 '+ randomPw + ' 입니다.\n';
         
         const mailOptions = {
             from,
@@ -77,4 +90,3 @@ router.post('/', async (req, res,) => {
     
 });
 module.exports = router;
-    

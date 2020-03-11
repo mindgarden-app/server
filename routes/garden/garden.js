@@ -17,6 +17,7 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
             //잡초 심기
             console.log(1);
             const month = (req.params.date).split('-');
+            console.log("month: ", month);
             if(month[1] == '02'){//3번 garden에 Insert
                 console.log(2);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
