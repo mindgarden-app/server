@@ -83,7 +83,30 @@ router.post('/', upload.single('diary_img'), authUtil.isLoggedin, async(req, res
             } else {
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS, result));
             }
-        } else{
+        }else if(selectBalloonResult[0]['balloon'] == 2){//리셋된 기존 유저
+            const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
+            const updateBalloonQuery = 'UPDATE balloon SET `balloon`= 1 WHERE userIdx = ?';
+            result = '';
+            const insertTransaction_ = await db.Transaction(async(connection) => {
+                if(req.file == undefined){
+                    var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                    const insertDiaryResult = await connection.query(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.decoded.idx, null]);
+                    result = insertDiaryResult['insertId'];
+                } else{
+                    var diary_date = moment().format("YYYY-MM-DD ddd HH:mm:ss");//년, 월, 일, 요일, 시, 분, 초
+                    const diary_img = req.file.location;
+                    const insertDiaryResult = await connection.query(insertDiaryQuery, [diary_date, req.body.diary_content, req.body.weatherIdx, req.decoded.idx, diary_img]);
+                    result = insertDiaryResult['insertId'];
+                }
+                const updateBalloonResult = await connection.query(updateBalloonQuery, [req.decoded.idx]);
+            });
+            if (insertTransaction_ != 'Success') {//기존 유저 트랜잭션
+                res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.EXIST_USER_FAIL));
+            } else {
+                res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS, result));
+            }
+        }
+        else{
             res.status(200).send(util.successTrue(statusCode.NO_CONTENT, resMessage.ALREADY_WRITE));//안드 부탁...
         }
     }

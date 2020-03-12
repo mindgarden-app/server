@@ -34,7 +34,7 @@ router.post('/', authUtil.isLoggedin, async(req, res) => {
                     balloon_result.push(json);
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.PLANT_SUCCESS, balloon_result));
                 }
-            } else if(getBalloonResult[0]['balloon'] == '0'){//일기를 쓰고 심음-->심을 수 없음
+            } else if(getBalloonResult[0]['balloon'] == '0' || getBalloonResult[0]['balloon'] == '2'){//일기를 쓰고 심음-->심을 수 없음
                 console.log("1");
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.ALREADY_PLANT));
             } 
