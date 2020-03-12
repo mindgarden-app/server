@@ -15,11 +15,8 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
         const getGardenResult = await db.queryParam_Parse(getGardenQuery,[req.decoded.idx, req.params.date+'%']);
         if (getGardenResult.length == 0) {
             //잡초 심기
-            console.log(1);
             const month = (req.params.date).split('-');
-            console.log("month: ", month);
             if(month[1] == '02'){//3번 garden에 Insert
-                console.log(2);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_3 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
@@ -50,7 +47,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                 }
             }
             if(month[1] == '04' || month[1] == '06' || month[1] == '09' || month[1] == '11'){//2번 garden에 insert
-                console.log(3);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertGardenQuery_2 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
@@ -79,7 +75,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                 }
             }
             if(month[1] == '01' || month[1] == '03' || month[1] == '05' || month[1] == '07' || month[1] == '08' || month[1] == '10' || month[1] == '12'){//1번 garden에 insert
-                console.log(4);
                 const insertGardenQuery_1 = 'INSERT INTO garden (date, location, treeIdx, userIdx) VALUES (?, ?, ?, ?)';
                 const insertTransaction = await db.Transaction(async(connection) => {
                     const insertGardenResult_1 = await connection.query(insertGardenQuery_1, [req.params.date+'-01 Mon', 30, 16, req.decoded.idx]);
