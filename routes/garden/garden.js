@@ -33,6 +33,9 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
+                        for(i=0; i<getGardenResult_.length; i++){
+                            getGardenResult_[i]['treeIdx'] = Number(getGardenResult_[i]['treeIdx'])
+                        }
                         for(i=0;i<getGardenResult_.length;i++){//balloon 추가
                             getGardenResult_[i]['balloon']=0;
                         }
@@ -61,6 +64,9 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
+                        for(i=0; i<getGardenResult_.length; i++){
+                            getGardenResult_[i]['treeIdx'] = Number(getGardenResult_[i]['treeIdx'])
+                        }
                         for(i=0;i<getGardenResult_.length;i++){//balloon 추가
                             getGardenResult_[i]['balloon']=0;
                         }
@@ -87,6 +93,9 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                     if (getGardenResult_.length == 0) {//트랜잭션 성공, select 실패
                         res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.GARDEN_SELECT_FAIL));
                     } else {//최종 성공
+                        for(i=0; i<getGardenResult_.length; i++){
+                            getGardenResult_[i]['treeIdx'] = Number(getGardenResult_[i]['treeIdx'])
+                        }
                         for(i=0;i<getGardenResult_.length;i++){//balloon 추가
                             getGardenResult_[i]['balloon']=0;
                         }
@@ -100,7 +109,10 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                     }
                 }
             }
-        } else if(getGardenResult[(getGardenResult.length)-1]['treeIdx'] > 15){//잡초만 있는 경우 
+        } else if(getGardenResult[(getGardenResult.length)-1]['treeIdx'] > 15){//잡초만 있는 경우
+            for(i=0; i<getGardenResult.length; i++){
+                getGardenResult[i]['treeIdx'] = Number(getGardenResult[i]['treeIdx'])
+            }
             const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
             const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//완전 처음 쓰는 사람
@@ -127,6 +139,9 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             }
         } else {
+            for(i=0; i<getGardenResult.length; i++){
+                getGardenResult[i]['treeIdx'] = Number(getGardenResult[i]['treeIdx'])
+            }
             const getBalloonQuery = 'SELECT balloon FROM balloon WHERE userIdx = ?';
             const getBalloonResult = await db.queryParam_Parse(getBalloonQuery ,[req.decoded.idx]);
             if (getBalloonResult.length == 0) {//garden 성공, balloon 실패
