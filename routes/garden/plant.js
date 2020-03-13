@@ -35,11 +35,9 @@ router.post('/', authUtil.isLoggedin, async(req, res) => {
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.PLANT_SUCCESS, balloon_result));
                 }
             } else if(getBalloonResult[0]['balloon'] == '0' || getBalloonResult[0]['balloon'] == '2'){//일기를 쓰고 심음-->심을 수 없음
-                console.log("1");
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.ALREADY_PLANT));
             } 
             // else if(getCheckResult[0]['check'] == '2'){//일기를 안썼음->심을 수 없음
-            //     console.log("2");
             //     res.status(200).send(util.successTrue(statusCode.OK, resMessage.WRITE_DIARY));
             // }
         }

@@ -12,7 +12,6 @@ const crypto = require('crypto-promise');
 
 const arr = "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
 
-
 function createCode(objArr, iLength) {
     var arr = objArr;
     var randomStr = "";
@@ -21,7 +20,6 @@ function createCode(objArr, iLength) {
     }
     return randomStr
 }
-
 
 //유효한 email인지 확인
 //body-email
@@ -54,7 +52,6 @@ router.post('/', async (req, res,) => {
             html 
         };
     
-        
         const transporter = nodemailer.createTransport(smtpPool({
             service: mailinfo.config.mailer.service,
             host: mailinfo.config.mailer.host,

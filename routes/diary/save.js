@@ -38,8 +38,8 @@ router.post('/', upload.single('diary_img'), authUtil.isLoggedin, async(req, res
             console.log("2");
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS, result));
         }
-    } else {//여기 부터~~~~~~~~~~~~~~~
-        if(selectBalloonResult[0]['balloon'] == 1){//기존 유저-->등록 성공(update)-->diary insert, balloon update
+    } else {//기존 유저-->등록 성공(update)-->diary insert, balloon update
+        if(selectBalloonResult[0]['balloon'] == 1){//balloon값이 1이면 나무를 아직 심지 않은 것이니, 일기를 써도 그대로 1이 유지된다.
             const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
             const updateBalloonQuery = 'UPDATE balloon SET `balloon`= 1 WHERE userIdx = ?';
             result = '';
@@ -61,7 +61,7 @@ router.post('/', upload.single('diary_img'), authUtil.isLoggedin, async(req, res
             } else {
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS, result));
             }
-        }else if(selectBalloonResult[0]['balloon'] == 0){
+        }else if(selectBalloonResult[0]['balloon'] == 0){//balloon값이 0이면 일기를 쓰고 나무를 심은 것이니, 나무를 심지 못하도록 0을 유지한다.
             const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
             const updateBalloonQuery = 'UPDATE balloon SET `balloon`= 0 WHERE userIdx = ?';
             result = '';
@@ -83,7 +83,7 @@ router.post('/', upload.single('diary_img'), authUtil.isLoggedin, async(req, res
             } else {
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.DIARY_SAVE_SUCCESS, result));
             }
-        }else if(selectBalloonResult[0]['balloon'] == 2){//리셋된 기존 유저
+        }else if(selectBalloonResult[0]['balloon'] == 2){//리셋된 기존 유저(balloon값이 2이면, 당일 처음으로 쓴 일기이기 때문에 나무를 심을 수 있게 balloon을 1로 update)
             const insertDiaryQuery = 'INSERT INTO diary (date, diary_content, weatherIdx, userIdx, diary_img) VALUES (?, ?, ?, ?, ?)';
             const updateBalloonQuery = 'UPDATE balloon SET `balloon`= 1 WHERE userIdx = ?';
             result = '';
