@@ -9,5 +9,4 @@ router.use('/garden', require('./garden'));
 router.use('/scheduler', require('./scheduler'));
 router.use('/user', require('./user'));
 
-
 module.exports = router;
