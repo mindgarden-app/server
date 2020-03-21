@@ -8,5 +8,6 @@ router.use('/diarylist', require('./diarylist'));
 router.use('/garden', require('./garden'));
 router.use('/scheduler', require('./scheduler'));
 router.use('/user', require('./user'));
+router.use('/apple', require('./apple'));
 
 module.exports = router;
