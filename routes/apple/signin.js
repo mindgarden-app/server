@@ -13,7 +13,7 @@ router.post('/', async(req, res) => {
     const email = req.body.email;
     const userIdentifier = req.body.user;//사용자의 고유한 값
 
-    if(fullName == null && email == null){//기존 사용자
+    if(fullName == "" && email == ""){//기존 사용자
         const chkUserQuery = 'SELECT * FROM user WHERE id = ?';
         const chkUserResult = await db.queryParam_Parse(chkUserQuery, [userIdentifier]);
 
@@ -29,8 +29,8 @@ router.post('/', async(req, res) => {
             var json = new Object();
             json.refreshToken = refreshToken;
             json.token = token;
-            json.name = fullName;
-            json.email = email;
+            json.name = chkUserResult[0]['name'];
+            json.email = chkUserResult[0]['email'];
             json.expires_in = 3600
             token_result.push(json);
             res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, token_result));      
