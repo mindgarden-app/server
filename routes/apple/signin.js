@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
-const passport = require('passport');
-
 const db = require('../../module/pool');
-const utils = require('../../module/utils');
+const util = require('../../module/utils');
 const resMessage = require('../../module/responseMessage');
 const statusCode = require('../../module/statusCode');
+const jwtUtils = require('../../module/jwt');
 
 //애플로그인
 //fullName, email, user저장
@@ -27,13 +25,15 @@ router.post('/', async(req, res) => {
         if(UpdateRefreshResult.length == 0){
             res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
         }else{
+            const token_result = [];
             var json = new Object();
             json.refreshToken = refreshToken;
             json.token = token;
             json.name = fullName;
             json.email = email;
             json.expires_in = 3600
-            res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, json));      
+            token_result.push(json);
+            res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, token_result));      
         }
     }else{//신규 사용자
         const insertUserQuery = 'INSERT INTO user (name, email, img, authType, password, id) VALUES (?, ?, ?, ?, ?, ?)';
@@ -54,13 +54,15 @@ router.post('/', async(req, res) => {
                 if(UpdateRefreshResult.length == 0){
                     res.status(200).send(util.successFalse(statusCode.DB_ERROR, resMessage.REFRESH_UPDATE_ERROR));
                 }else{
+                    const token_result = [];
                     var json = new Object();
                     json.refreshToken = refreshToken;
                     json.token = token;
                     json.name = fullName;
                     json.email = email;
                     json.expires_in = 3600
-                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, json));                             
+                    token_result.push(json);
+                    res.status(200).send(util.successTrue(statusCode.OK, resMessage.LOGIN_SUCCESS, token_result));                             
                 } 
             }
         }
