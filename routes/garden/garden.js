@@ -42,9 +42,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
-                        // for(i=0;i<getGardenResult_.length;i++){
-                        //     getGardenResult_[i]['check']=2;
-                        // }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
@@ -73,9 +70,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
-                        // for(i=0;i<getGardenResult_.length;i++){
-                        //     getGardenResult_[i]['check']=2;
-                        // }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
@@ -102,9 +96,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                         for(i=0;i<getGardenResult_.length;i++){
                             getGardenResult_[i]['treeNum']=0;
                         }
-                        // for(i=0;i<getGardenResult_.length;i++){
-                        //     getGardenResult_[i]['check']=2;
-                        // }
                         res.status(200).send(util.successTrue(statusCode.OK, resMessage.GROSS_INSERT_SUCCESS, getGardenResult_));
                     }
                 }
@@ -122,9 +113,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                 for(i=0;i<getGardenResult.length;i++){
                     getGardenResult[i]['treeNum']=0;
                 }
-                // for(i=0;i<getGardenResult.length;i++){
-                //     getGardenResult[i]['check']=2;
-                // }
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             } else {
                 for(i=0;i<getGardenResult.length;i++){//balloon 추가
@@ -133,9 +121,6 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                 for(i=0;i<getGardenResult.length;i++){
                     getGardenResult[i]['treeNum']=0;
                 }
-                // for(i=0;i<getGardenResult.length;i++){
-                //     getGardenResult[i]['check']=getBalloonResult[0]['check'];
-                // }
                 res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
             }
         } else {
@@ -158,13 +143,8 @@ router.get('/:date', authUtil.isLoggedin, async(req, res)=>{
                     for(i=0;i<getGardenResult.length;i++){
                         getGardenResult[i]['treeNum']=getTreeNumResult[0]['treeNum'];
                     }
-                    // for(i=0;i<getGardenResult.length;i++){
-                    //     getGardenResult[i]['check']=getBalloonResult[0]['check'];
-                    // }
                     res.status(200).send(util.successTrue(statusCode.OK, resMessage.GARDEN_SUCCESS, getGardenResult));
                 }
-                //getGardenResult[0]['balloon']=getBalloonResult[0]['balloon'];
-                //getGardenResult.push({"balloon": getBalloonResult[0]['balloon']});
             }
         }
     }catch(err){
