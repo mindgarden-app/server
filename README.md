@@ -1,5 +1,7 @@
 # MindGarden(마인드가든) - Node.js Server
+
 ------
+
 - 마인드 가든은 하루의 이야기로 나만의 정원을 가꿔나가는 힐링 다이어리앱입니다. 
 - 매일 일기를 기록하고 받은 나무와 꽃을 통해 정원을 가꿔나갈 수 있습니다. 
 - 정원은 달마다 리셋되며 , 지난 정원은 앱 내에서 항상 볼 수 있습니다 . 
@@ -14,7 +16,9 @@
 ------
 
 ## Workflow
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/KakaoTalk_Photo_2019-07-12-21-16-29.png)
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbOXaLH%2FbtqEn70YFeD%2F8guroo60sKId0m4t2yqhN0%2Fimg.png)
+
 
 
 ## 주요기능
@@ -61,7 +65,7 @@
 
 ## ERD
 
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2019-07-11+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.58.12.png)
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbjOGR5%2FbtqEnhbSCjP%2FmxvTTRtWfLfkQVIpOuEcKk%2Fimg.png)
 
 
 
@@ -71,7 +75,17 @@
 
 # Server Architecture
 
-![](https://jungah.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2019-07-10+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+11.04.04.png)
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FuIZOf%2FbtqEmo4bfHJ%2F7HpAkVjQq0HJIxKBtcikYk%2Fimg.png)
+
+
+
+## 오늘의 앱 선정
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbXx3K7%2FbtqEmqt8Qyx%2FO77kWwmZ7RafJokTjOZqWK%2Fimg.png" style="zoom:25%;" /> 
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FmjfK1%2FbtqEmMpZaf5%2FwN9OOezpJGWKIzB0J1kZU0%2Fimg.png" style="zoom:25%;" />
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fb9Mbv3%2FbtqEmLLjDVt%2FMPyBxtqdFkm0kYVnTSxJMK%2Fimg.png" style="zoom:25%;" /> 
 
 
 
