@@ -78,14 +78,22 @@
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FuIZOf%2FbtqEmo4bfHJ%2F7HpAkVjQq0HJIxKBtcikYk%2Fimg.png)
 
 
+## 결과물
 
-## 오늘의 앱 선정
+1. 2019.08.27 : 1.0 배포 🎉
+2. 2020.01.18 : 앱스토어 '이번 주 에디터의 발견' 추천 🎉
 
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbXx3K7%2FbtqEmqt8Qyx%2FO77kWwmZ7RafJokTjOZqWK%2Fimg.png" style="zoom:25%;" /> 
-&nasp;
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FmjfK1%2FbtqEmMpZaf5%2FwN9OOezpJGWKIzB0J1kZU0%2Fimg.png" style="zoom:25%;" />
-&nasp;
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fb9Mbv3%2FbtqEmLLjDVt%2FMPyBxtqdFkm0kYVnTSxJMK%2Fimg.png" style="zoom:25%;" /> 
+   <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2203.jpg" alt="drawing" width="200"/> <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2201.jpg" alt="drawing" width="250"/>
+
+3. 2020.03.16 : 앱스토어 투데이 추천 + 18위 🎉
+
+   <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2476.jpg" alt="drawing" width="200"/> <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2541.jpg" alt="drawing" width="250"/> <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2503.JPG" alt="drawing" width="300"/>
+  
+4. 2020.03.24 : 앱스토어 투데이 **오늘의 앱** 선정 🎉
+
+   <img src="https://s3.ap-northeast-2.amazonaws.com/github.readme.image/IMG_2526.jpg" alt="drawing" width="250"/>
+  
+  <br/>
 
 
 
